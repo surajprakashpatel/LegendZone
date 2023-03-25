@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.srsoft.legendzone'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.srsoft.legendzone"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:31.3.0')
+
+
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics'
+
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.firebase:firebase-auth:21.0.3'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //region #SDP/SSP
+    implementation "com.intuit.sdp:sdp-android:1.1.0"
+    implementation "com.intuit.ssp:ssp-android:1.1.0"
+
+    //dot indicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:4.13.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
+
+
+    //lotte
+    implementation "com.airbnb.android:lottie:3.4.1"
+
+    //otp view
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2'
+
+    //loader
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+
+    //Gif Imageview
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.24'
+
+    //cropper
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+}

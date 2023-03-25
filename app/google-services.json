@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "844932857896",
+    "firebase_url": "https://legendzone-295c3-default-rtdb.firebaseio.com",
+    "project_id": "legendzone-295c3",
+    "storage_bucket": "legendzone-295c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844932857896:android:f816dc5361dad18848351d",
+        "android_client_info": {
+          "package_name": "com.srsoft.legendzone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844932857896-gf62i6kfunqhb15c0b8uogell7a7bv82.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.srsoft.legendzone",
+            "certificate_hash": "e63f00537503786526f118c38f0c8d256ec4b942"
+          }
+        },
+        {
+          "client_id": "844932857896-b7o2d2q267fuoo9fjue66k0ic8h3r7ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5d4TgM48-6foBebFoP13Mg4-8_-Omlac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844932857896-b7o2d2q267fuoo9fjue66k0ic8h3r7ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
