@@ -3,8 +3,8 @@
     <string name="sign_up_log_in">Sign Up/Log In</string>
     <string name="browse_services">Browse Services</string>
     <string name="please_sign_up_to_continue_and_be_aware_nof_all_options">Please sign up to continue and be aware \nof all options.</string>
-    <string name="please_log_in_to_continue_and_be_aware_nof_all_options">Please log in to continue and be aware \nof all options.</string>
-    <string name="insert_your_phone_number_to_get_verification_code">Insert your phone number to get verification code.</string>
+    <string name="please_enter_your_phone_number_">Please enter your phone number to verify.</string>
+    <string name="insert_your_phone_number_to_get_verification_code">Enter phone number to get verification code.</string>
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
     <string name="password">Password*</string>
@@ -65,9 +65,9 @@
     <string name="heading2">Peer-to-Peer Betting!</string>
     <string name="heading3">Earn Comission</string>
     <string name="desc1">Enjoy the confidence of knowing your bets \nare 100% safe and secure with\n gauranteed payouts.</string>
-    <string name="desc2">Bet against friends, family, and other users \nin our peer-to-peer betting\nsystem</string>
-    <string name="desc3">Refer your friends and and family to earn \ncommision on the bets they make.\nsystem</string>
-    <string name="enter_your_phone_number">Enter Your Phone Number</string>
+    <string name="desc2">Bet against friends, family, and other users \nin our peer-to-peer betting.\</string>
+    <string name="desc3">Refer your friends and and family to earn \ncommision on the bets they make.</string>
+    <string name="enter_your_phone_number">Your Phone Number</string>
     <string name="enter_your_password">Enter Your Password</string>
     <string name="skip">Skip</string>
     <string name="enter_your_name">Enter Your Name</string>
@@ -89,4 +89,6 @@
     <string name="please_select_your_state">Please select your state</string>
     <string name="select_your_city">City</string>
     <string name="please_select_your_city">Please select your city</string>
+    <string name="sign_in_continue">Sign in to continue</string>
+    <string name="send_otp">Send OTP</string>
 </resources>

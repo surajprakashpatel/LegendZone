@@ -69,9 +69,9 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * Show Error
      */
-    public void showError(String msg) {
+    public void showSnackBar(String msg) {
         if (msg == null) return;
-        Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content), msg, Snackbar.LENGTH_SHORT).show();
     }
 
     /**
