@@ -181,9 +181,9 @@ public class OTPVerificationActivity extends BaseActivity {
                             // Update UI
                             if (user != null) {
                                 if(newuser){
-//                                    Intent intent = new Intent(getApplicationContext(), OnBoardingActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
+                                    Intent intent = new Intent(getApplicationContext(), UpdateProfileActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }else {
                                     Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
                                     startActivity(intent);

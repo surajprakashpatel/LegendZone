@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.appcheck.FirebaseAppCheck;
@@ -53,9 +54,16 @@ public class SplashActivity extends BaseActivity {
            @Override
            public void run() {
                if(user!=null){
-                   Intent intent = new Intent(SplashActivity.this,WelcomeActivity.class);
-                   startActivity(intent);
-                   finish();
+                   if(user.getDisplayName().matches("")){
+                       Intent intent = new Intent(SplashActivity.this,UpdateProfileActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }else{
+                       Toast.makeText(SplashActivity.this, user.getDisplayName()+"", Toast.LENGTH_SHORT).show();
+                       Intent intent = new Intent(SplashActivity.this,DashboardActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }
                }else{
                    Intent intent = new Intent(SplashActivity.this,WelcomeActivity.class);
                    startActivity(intent);
