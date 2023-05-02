@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="@color/dark_gray"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="4dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="@color/dark_gray"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="4dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="@color/dark_gray"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="4dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_16sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="@color/dark_gray"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="4dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

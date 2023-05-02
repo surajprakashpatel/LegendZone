@@ -16,6 +16,8 @@ import com.google.firebase.appcheck.FirebaseAppCheck;
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.srsoft.legendzone.R;
 import com.srsoft.legendzone.ui.common.BaseActivity;
 
@@ -26,7 +28,6 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
 
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -59,7 +60,7 @@ public class SplashActivity extends BaseActivity {
                        startActivity(intent);
                        finish();
                    }else{
-                       Toast.makeText(SplashActivity.this, user.getDisplayName()+"", Toast.LENGTH_SHORT).show();
+
                        Intent intent = new Intent(SplashActivity.this,DashboardActivity.class);
                        startActivity(intent);
                        finish();

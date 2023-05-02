@@ -8,8 +8,8 @@ public class User {
     private String userAge;
     private String userEmail;
     private String userId;
-    private String userphoneNumber;
-    private String userpincode;
+    private String userPhoneNumber;
+    private String userPincode;
     private Uri userPhotoUrl;
 
 
@@ -17,13 +17,13 @@ public class User {
 
     }
 
-    public User( String userId,String userName, String userAge, String userEmail, String userphoneNumber, String userpincode, Uri userPhotoUrl) {
+    public User( String userId,String userName, String userAge, String userEmail, String userPhoneNumber, String userPincode, Uri userPhotoUrl) {
         this.userName = userName;
         this.userAge = userAge;
         this.userEmail = userEmail;
         this.userId = userId;
-        this.userphoneNumber = userphoneNumber;
-        this.userpincode = userpincode;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userPincode = userPincode;
         this.userPhotoUrl = userPhotoUrl;
     }
 
@@ -60,19 +60,19 @@ public class User {
     }
 
     public String getUserphoneNumber() {
-        return userphoneNumber;
+        return userPhoneNumber;
     }
 
     public void setUserphoneNumber(String userphoneNumber) {
-        this.userphoneNumber = userphoneNumber;
+        this.userPhoneNumber = userphoneNumber;
     }
 
     public String getUserpincode() {
-        return userpincode;
+        return userPincode;
     }
 
     public void setUserpincode(String userpincode) {
-        this.userpincode = userpincode;
+        this.userPincode = userpincode;
     }
 
     public Uri getUserPhotoUrl() {

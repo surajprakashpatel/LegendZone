@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <item android:id="@+id/nav_home"
+        android:title="@string/home"
+        android:icon="@drawable/nav_home"
+        />
+
+    <item android:id="@+id/nav_bets"
+        android:title="@string/bets"
+        android:icon="@drawable/nav_bets"
+        />
+
+
+    <item android:id="@+id/nav_wallet"
+        android:title="@string/wallet"
+        android:icon="@drawable/nav_wallet"
+        />
+
+    <item android:id="@+id/nav_rewards"
+        android:title="@string/rewards"
+        android:icon="@drawable/nav_rewards"
+        />
+
+    <item android:id="@+id/nav_profile"
+        android:title="@string/profile"
+        android:icon="@drawable/baseline_person_24"
+        />
 </menu>

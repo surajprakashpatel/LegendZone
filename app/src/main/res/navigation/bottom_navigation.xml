@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/nav_home">
+
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.srsoft.legendzone.ui.fragment.HomeFragment"
+        android:label=""
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_bets"
+        android:name="com.srsoft.legendzone.ui.fragment.BetsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_bets" />
+
+    <fragment
+        android:id="@+id/nav_wallet"
+        android:name="com.srsoft.legendzone.ui.fragment.WalletFragment"
+        android:label=""
+        tools:layout="@layout/fragment_wallet" />
+
+
+    <fragment
+        android:id="@+id/nav_rewards"
+        android:name="com.srsoft.legendzone.ui.fragment.ReferralsFragment"
+        android:label=""
+        tools:layout="@layout/fragment_referrals" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.srsoft.legendzone.ui.fragment.ProfileFragment"
+        android:label=""
+        tools:layout="@layout/fragment_profile" />
+</navigation>

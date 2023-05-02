@@ -15,4 +15,14 @@
     <color name="secondary">#FFDB1D</color>
     <color name="gray">#dddcdc</color>
     <color name="gray_bg">#f2f2f3</color>
+
+    <color name="leather1">#FF6E6E</color>
+    <color name="leather3">#ff7f7f</color>
+    <color name="leather2">#FF6A6A</color>
+    <color name="bg">#E5E5E5</color>
+    <color name="dark_gray">#919191</color>
+    <color name="dark_green">#669900</color>
+    <color name="green">#8BC34A</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="blue_light">#0D2278D4</color>
 </resources>

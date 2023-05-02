@@ -91,4 +91,8 @@
     <string name="please_select_your_city">Please select your city</string>
     <string name="sign_in_continue">Sign in to continue</string>
     <string name="send_otp">Send OTP</string>
+    <string name="profile">Profile</string>
+    <string name="rewards">Rewards</string>
+    <string name="wallet">Wallet</string>
+    <string name="bets">Bets</string>
 </resources>

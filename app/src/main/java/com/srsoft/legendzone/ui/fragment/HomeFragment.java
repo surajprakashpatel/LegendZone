@@ -1,14 +1,37 @@
 package com.srsoft.legendzone.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.srsoft.legendzone.R;
+import com.srsoft.legendzone.databinding.FragmentHomeBinding;
+import com.srsoft.legendzone.models.Game;
+import com.srsoft.legendzone.ui.activity.WelcomeActivity;
+import com.srsoft.legendzone.ui.adapter.GameAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +40,11 @@ import com.srsoft.legendzone.R;
  */
 public class HomeFragment extends Fragment {
 
+    private List<Game> games = new ArrayList<>();
+
+    private GameAdapter gameAdapter;
+    FirebaseFirestore database;
+    private FragmentHomeBinding binding;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +89,96 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(getLayoutInflater(), container, false);
+        initialization();
+        return binding.getRoot();
     }
+
+    private void initialization() {
+
+        database = FirebaseFirestore.getInstance();
+
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        binding.gamesRecycler.setLayoutManager(layoutManager);
+        gameAdapter = new GameAdapter(getActivity(), games, false);
+        binding.gamesRecycler.setAdapter(gameAdapter);
+
+
+        getBanner();
+        getGames();
+        getPeoplesList();
+
+
+    }
+
+    private void getBanner() {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        binding.textView.setText(user.getDisplayName());
+        database.collection("sliderImages").document("sliderImage").get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                String imageUrl = document.getString("imageUrl");
+                                Glide.with(getContext())
+                                        .load(imageUrl)
+                                        .into(binding.slidePager);
+                                binding.sliderShimmer.hideShimmer();
+
+                            } else {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                });
+
+    }
+
+    private void getPeoplesList() {
+    }
+
+    private void getGames() {
+        database.collection("games").whereEqualTo("gameStatus","active").get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    games.clear();
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        games.add(document.toObject(Game.class));
+                                    }
+                                    binding.gamesShimmer.hideShimmer();
+                                    binding.gamesShimmer.setVisibility(View.GONE);
+                                    gameAdapter.notifyDataSetChanged();
+                                } else {
+
+                                }
+                            }
+                        });
+
+
+
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        mHandler = new Handler();
+
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        mHandler.removeCallbacksAndMessages(null);
+    }
+    
 }
