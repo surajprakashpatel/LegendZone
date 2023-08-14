@@ -1,5 +1,6 @@
 package com.srsoft.legendzone.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.razorpay.Checkout;
 import com.srsoft.legendzone.R;
+import com.srsoft.legendzone.databinding.FragmentProfileBinding;
+import com.srsoft.legendzone.databinding.FragmentWalletBinding;
+import com.srsoft.legendzone.ui.activity.DepositFundActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,8 +23,8 @@ import com.srsoft.legendzone.R;
  */
 public class WalletFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FragmentWalletBinding binding;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -60,7 +66,18 @@ public class WalletFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wallet, container, false);
+        binding = FragmentWalletBinding.inflate(getLayoutInflater(), container, false);
+        initialization();
+        return binding.getRoot();
+    }
+    private void initialization(){
+
+        binding.btnAddFunds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DepositFundActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

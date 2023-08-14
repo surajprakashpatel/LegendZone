@@ -95,4 +95,5 @@
     <string name="rewards">Rewards</string>
     <string name="wallet">Wallet</string>
     <string name="bets">Bets</string>
+    <string name="checkout_consent">Any transaction may take upto 24 hours. Please contact the support if any issue occurs.</string>
 </resources>

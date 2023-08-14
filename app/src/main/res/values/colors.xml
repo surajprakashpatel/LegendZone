@@ -15,6 +15,10 @@
     <color name="secondary">#FFDB1D</color>
     <color name="gray">#dddcdc</color>
     <color name="gray_bg">#f2f2f3</color>
+    <color name="redlight">#F44336</color>
+    <color name="bluelight">#3F51B5</color>
+    <color name="greenlight">#4ECC52</color>
+
 
     <color name="leather1">#FF6E6E</color>
     <color name="leather3">#ff7f7f</color>
@@ -22,7 +26,22 @@
     <color name="bg">#E5E5E5</color>
     <color name="dark_gray">#919191</color>
     <color name="dark_green">#669900</color>
-    <color name="green">#8BC34A</color>
+    <color name="green">#51C856</color>
     <color name="bg_screen3">#3395ff</color>
     <color name="blue_light">#0D2278D4</color>
+
+
+    <color name="splashbg">#F4F4F4</color>
+    <color name="tron">#673AB7</color>
+    <color name="darkorange">#CA7800</color>
+    <color name="tronx">#D7C1FF</color>
+    <color name="bgcard">#55B2FF</color>
+    <color name="button">#2B2B2B</color>
+    <color name="buttonbg">#4CAF50</color>
+    <color name="buttonsolana">#FFF6A7</color>
+    <color name="buttonsolanad">#FFC107</color>
+    <color name="binance">#F44336</color>
+    <color name="binancex">#FFC4C0</color>
+    <color name="tether">#4CAF50</color>
+    <color name="tetherx">#B7F4BA</color>
 </resources>

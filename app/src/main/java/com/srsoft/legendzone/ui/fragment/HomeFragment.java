@@ -45,8 +45,7 @@ public class HomeFragment extends Fragment {
     private GameAdapter gameAdapter;
     FirebaseFirestore database;
     private FragmentHomeBinding binding;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -106,7 +105,7 @@ public class HomeFragment extends Fragment {
 
         getBanner();
         getGames();
-        getPeoplesList();
+        getrecentWithdrawals();
 
 
     }
@@ -140,7 +139,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void getPeoplesList() {
+    private void getrecentWithdrawals() {
+        binding.recentwithdrawal.hideShimmer();
+        binding.recentwithdrawallayout.setVisibility(View.GONE);
     }
 
     private void getGames() {

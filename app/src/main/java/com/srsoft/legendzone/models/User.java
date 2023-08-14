@@ -12,12 +12,19 @@ public class User {
     private String userPincode;
     private Uri userPhotoUrl;
 
+    private String referralId;
+
+    private String referredBy;
+    private int totalBalance;
+
 
     public User(){
 
     }
 
-    public User( String userId,String userName, String userAge, String userEmail, String userPhoneNumber, String userPincode, Uri userPhotoUrl) {
+
+
+    public User(String userId, String userName, String userAge, String userEmail, String userPhoneNumber, String userPincode, Uri userPhotoUrl, String referralId, String referredBy, Integer totalBalance) {
         this.userName = userName;
         this.userAge = userAge;
         this.userEmail = userEmail;
@@ -25,6 +32,9 @@ public class User {
         this.userPhoneNumber = userPhoneNumber;
         this.userPincode = userPincode;
         this.userPhotoUrl = userPhotoUrl;
+        this.referralId = referralId;
+        this.referredBy = referredBy;
+        this.totalBalance = totalBalance;
     }
 
     public String getUserName() {
@@ -81,5 +91,28 @@ public class User {
 
     public void setUserPhotoUrl(Uri userPhotoUrl) {
         this.userPhotoUrl = userPhotoUrl;
+    }
+
+    public void setTotalBalance(int totalBalance) {
+        this.totalBalance = totalBalance;
+    }
+
+    public int getTotalBalance() {
+        return totalBalance;
+    }
+    public String getReferralId() {
+        return referralId;
+    }
+
+    public void setReferralId(String referralId) {
+        this.referralId = referralId;
+    }
+
+    public String getReferredBy() {
+        return referredBy;
+    }
+
+    public void setReferredBy(String referredBy) {
+        this.referredBy = referredBy;
     }
 }

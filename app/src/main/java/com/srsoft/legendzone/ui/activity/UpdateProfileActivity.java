@@ -1,33 +1,26 @@
 package com.srsoft.legendzone.ui.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -43,7 +36,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 
 public class UpdateProfileActivity extends BaseActivity {
 
@@ -52,6 +44,7 @@ public class UpdateProfileActivity extends BaseActivity {
     private ActivityUpdateProfileBinding binding;
 
 
+    private boolean imageSelected = false;
     Uri profileImageUrl;
     Uri imageUri;
 
@@ -85,7 +78,10 @@ public class UpdateProfileActivity extends BaseActivity {
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateProfile();
+
+                if(imageSelected)updateProfile();
+                else showAlertDialog("Please choose an Image.",UpdateProfileActivity.this);
+
             }
         });
 
@@ -110,6 +106,7 @@ public class UpdateProfileActivity extends BaseActivity {
         String age = binding.etAge.getText().toString();
         String email = binding.etEmail.getText().toString();
         String pincode =binding.etPincode.getText().toString();
+        String referredBy= binding.etreferralId.getText().toString();
 
         if(name.matches("")){
             binding.etName.setError("Enter your name");
@@ -119,17 +116,19 @@ public class UpdateProfileActivity extends BaseActivity {
             binding.etEmail.setError("Enter your email");
         } else if (pincode.matches("")) {
             binding.etPincode.setError("Enter City pincode");
+        } else if (referredBy.matches("")) {
+            binding.etreferralId.setError("Enter valid referral code");
         }else{
             showLoader();
 
-            uploadImage(name,age,email,pincode);
+            uploadImage(name,age,email,pincode,referredBy);
 
         }
 
 
     }
 
-    private void uploadImage(String name,String age,String email,String pincode) {
+    private void uploadImage(String name,String age,String email,String pincode,String referredBy) {
 
 
         // File or Blob
@@ -179,8 +178,9 @@ public class UpdateProfileActivity extends BaseActivity {
                                 .build();
                         user.updateProfile(profileChangeRequest);
                         profileImageUrl=uri;
+                        String referralId = user.getUid().substring(0,3).toUpperCase()+ user.getPhoneNumber().substring(4,5);
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
-                        User currentUser = new User(userId,name,age,email,user.getPhoneNumber(),pincode,profileImageUrl);
+                        User currentUser = new User(userId,name,age,email,user.getPhoneNumber(),pincode,profileImageUrl, referralId, referredBy, 0);
                         db.collection("users").document(userId).set(currentUser);
                         hideLoader();
 
@@ -209,6 +209,7 @@ public class UpdateProfileActivity extends BaseActivity {
     }
 
     private void openGallery(){
+        imageSelected = true;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
