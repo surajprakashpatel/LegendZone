@@ -47,6 +47,7 @@
             android:weightSum="2">
 
             <Button
+                android:id="@+id/btnAddFunds"
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_marginLeft="20dp"
@@ -61,6 +62,7 @@
                 android:textSize="14dp" />
 
             <Button
+                android:id="@+id/btnWithdrawFunds"
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_marginLeft="5dp"
@@ -108,7 +110,7 @@
             android:layout_gravity="center"
             android:textColor="@color/primary"
             android:textAlignment="center"
-            app:otp="2349"
+            app:otp="0159"
             app:bar_enabled="false"
             app:box_margin="@dimen/_5sdp"
             app:height="50dp"
@@ -150,6 +152,7 @@
                 android:weightSum="3">
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/fabGreen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -160,6 +163,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/fabBlue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_5sdp"
@@ -171,6 +175,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/fabRed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -286,14 +291,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_8sdp"
                 android:orientation="horizontal"
                 android:padding="@dimen/_5sdp"
                 android:weightSum="2">
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/fabSmall"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/green"
@@ -303,8 +309,9 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                   android:id="@+id/fabBig"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/bluelight"
@@ -316,12 +323,10 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/games_recycler"
-        android:background="@drawable/round_corner20"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_200sdp"
         android:layout_margin="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 

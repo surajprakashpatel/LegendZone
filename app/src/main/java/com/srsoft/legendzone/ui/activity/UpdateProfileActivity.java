@@ -15,12 +15,17 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -36,6 +41,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateProfileActivity extends BaseActivity {
 
@@ -106,7 +113,7 @@ public class UpdateProfileActivity extends BaseActivity {
         String age = binding.etAge.getText().toString();
         String email = binding.etEmail.getText().toString();
         String pincode =binding.etPincode.getText().toString();
-        String referredBy= binding.etreferralId.getText().toString();
+        String referredBy= binding.etreferralId.getText().toString().toUpperCase();
 
         if(name.matches("")){
             binding.etName.setError("Enter your name");
@@ -178,10 +185,25 @@ public class UpdateProfileActivity extends BaseActivity {
                                 .build();
                         user.updateProfile(profileChangeRequest);
                         profileImageUrl=uri;
-                        String referralId = user.getUid().substring(0,3).toUpperCase()+ user.getPhoneNumber().substring(4,5);
+                        String referralId = user.getUid().substring(0,5).toUpperCase();
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         User currentUser = new User(userId,name,age,email,user.getPhoneNumber(),pincode,profileImageUrl, referralId, referredBy, 0);
                         db.collection("users").document(userId).set(currentUser);
+                        Map<String, Object> referraldata = new HashMap<>();
+                        referraldata.put("referralCount",0);
+                        referraldata.put("referralEarnings",0);
+                        db.collection("users").document(userId).collection("referrals")
+                                .document(userId).set(referraldata);
+
+                        db.collection("users").whereEqualTo("referralId",referredBy).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                               QuerySnapshot queryDocumentSnapshots = task.getResult();
+                               DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                               db.collection("users").document(document.getId()).collection("referrals")
+                                       .document(document.getId()).update("referralCount", FieldValue.increment(1));
+                            }
+                        });
                         hideLoader();
 
                         Intent intent = new Intent(UpdateProfileActivity.this,DashboardActivity.class);

@@ -1,14 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f8f9fa"
+    android:orientation="vertical"
     tools:context=".ui.fragment.ReferralsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f8f9fa"
+    android:orientation="vertical">
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Refer and Earn"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        app:cardCornerRadius="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:src="@drawable/refer_vector"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_12sdp"/>
+
+            <TextView
+                android:id="@+id/referralline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:text="Get 40 Rs."
+                android:textColor="@color/tertiary"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/referralline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:text="For every new user you refer"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/referralline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_12sdp"
+                android:text="Share your referral code and earn\n40 Rs. on their first recharge"
+                android:gravity="center"
+                android:textSize="@dimen/_11ssp" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:text="Your Referral Code"
+                android:textSize="@dimen/_13sdp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:background="@drawable/round_corner20">
+
+                <EditText
+                    android:id="@+id/etCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_bg_rounded_inactive"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:scrollHorizontally="true"
+                    android:editable="false"
+                    android:textColor="@color/primary"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    tools:text="slkdfjaslk33"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_8sdp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCopy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Copy Code"
+                    android:letterSpacing="0.01"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:layout_marginEnd="@dimen/_3sdp"
+                    android:textSize="@dimen/_9ssp" />
+
+
+
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share Now"
+                android:letterSpacing=".1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp" />
+
+
+            <TextView
+                android:id="@+id/tvTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:text="Terms and Conditions Applied"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:textColor="@color/tertiary"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_12sdp"
+        android:elevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:text="Your Referrals"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_16ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total No of referral"
+                    android:textSize="@dimen/_13sdp" />
+
+                <TextView
+                    android:id="@+id/tvReferralCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp"
+                    android:text="0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total referral earnings"
+                    android:textSize="@dimen/_13sdp" />
+
+                <TextView
+                    android:id="@+id/tvReferralEarning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/tertiary"
+                    android:textSize="@dimen/_13sdp"
+                    android:text="0" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:id="@+id/referraltutorial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/tertiary"
+        android:text="See How Referral Works"
+        android:drawableEnd="@drawable/baseline_keyboard_arrow_right_24"
+        />
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>

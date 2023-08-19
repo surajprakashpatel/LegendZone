@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="India's no. Betting App"
+            android:text="India's no. 1 Esports App"
             android:fontFamily="@font/roboto_regular"/>
     </LinearLayout>
     <com.github.ybq.android.spinkit.SpinKitView

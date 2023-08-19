@@ -37,4 +37,16 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/_6sdp</item>
     </style>
+    <style name="bottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--for bottom sheet-->
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 </resources>

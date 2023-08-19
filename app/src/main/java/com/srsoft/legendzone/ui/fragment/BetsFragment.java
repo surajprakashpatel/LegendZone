@@ -2,27 +2,41 @@ package com.srsoft.legendzone.ui.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.srsoft.legendzone.R;
+import com.srsoft.legendzone.databinding.FragmentBetsBinding;
+import com.srsoft.legendzone.models.BetRecord;
+import com.srsoft.legendzone.models.GameRecord;
+import com.srsoft.legendzone.ui.activity.WingoGame;
+import com.srsoft.legendzone.ui.adapter.BetRecordAdapter;
+import com.srsoft.legendzone.ui.adapter.GameRecordAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link BetsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class BetsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FragmentBetsBinding binding;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
 
@@ -30,15 +44,6 @@ public class BetsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BetsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BetsFragment newInstance(String param1, String param2) {
         BetsFragment fragment = new BetsFragment();
         Bundle args = new Bundle();
@@ -60,7 +65,36 @@ public class BetsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bets, container, false);
+        binding = FragmentBetsBinding.inflate(getLayoutInflater(), container, false);
+        initialization();
+        return binding.getRoot();
+    }
+
+    private void initialization() {
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("users").document(user.getUid()).collection("betHistory")
+                .limit(10).orderBy("dateTime").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        ArrayList<BetRecord> betRecords = new ArrayList<>();
+                        for (DocumentSnapshot document : task.getResult()) {
+                            BetRecord betRecord = document.toObject(BetRecord.class);
+                            betRecords.add(betRecord);
+                        }
+                        if(betRecords.isEmpty()){
+                            binding.betsRecycler.setVisibility(View.GONE);
+                            binding.tvNoHistory.setVisibility(View.VISIBLE);
+                        }
+                        RecyclerView recyclerView = binding.betsRecycler;
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+                        BetRecordAdapter myAdapter = new BetRecordAdapter(getContext(),betRecords);
+                        recyclerView.setAdapter(myAdapter);
+                    }
+                });
     }
 }

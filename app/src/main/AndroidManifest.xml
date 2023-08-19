@@ -26,6 +26,9 @@
         android:theme="@style/Theme.LegendZone"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.FundWithdrawalActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.DepositFundActivity"
             android:exported="false" />
         <activity

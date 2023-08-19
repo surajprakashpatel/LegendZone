@@ -1,6 +1,8 @@
 package com.srsoft.legendzone.ui.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,9 +19,10 @@ import com.srsoft.legendzone.databinding.FragmentHomeBinding;
 import com.srsoft.legendzone.databinding.FragmentProfileBinding;
 import com.srsoft.legendzone.ui.activity.SplashActivity;
 import com.srsoft.legendzone.ui.activity.UpdateProfileActivity;
+import com.srsoft.legendzone.ui.common.BaseFragment;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends BaseFragment {
 
     private FragmentProfileBinding binding;
 
@@ -69,7 +72,61 @@ public class ProfileFragment extends Fragment {
                 .load(user.getPhotoUrl())
                 .into(binding.ivProfile);
 
+        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Unable to Logout!");
+                builder.setIcon(android.R.drawable.ic_menu_info_details);
+                builder.setCancelable(false);
+                AlertDialog dialog = builder.setNegativeButton("OK", (dialogInterface, i) -> dialogInterface.dismiss()).create();
+                dialog.show();
+            }
+        });
 
+        binding.settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("No settings available!");
+                builder.setIcon(android.R.drawable.ic_menu_info_details);
+                builder.setCancelable(false);
+                AlertDialog dialog = builder.setNegativeButton("OK", (dialogInterface, i) -> dialogInterface.dismiss()).create();
+                dialog.show();
+            }
+        });
 
+        binding.feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/legendzonegame/feedback"));
+                startActivity(browserIntent);
+            }
+        });
+
+        binding.beginnersguide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/legendzonegame/beginners-guide"));
+                startActivity(browserIntent);
+            }
+        });
+
+        binding.aboutus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/legendzonegame/about-us"));
+                startActivity(browserIntent);
+            }
+        });
+
+        binding.customersupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/legendzonegame/customer-support"));
+                startActivity(browserIntent);
+            }
+        });
     }
+
 }

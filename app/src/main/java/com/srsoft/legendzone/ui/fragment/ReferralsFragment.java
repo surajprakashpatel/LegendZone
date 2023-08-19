@@ -1,44 +1,37 @@
 package com.srsoft.legendzone.ui.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.srsoft.legendzone.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.srsoft.legendzone.databinding.FragmentReferralsBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReferralsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ReferralsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FragmentReferralsBinding binding;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public ReferralsFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ReferralsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ReferralsFragment newInstance(String param1, String param2) {
         ReferralsFragment fragment = new ReferralsFragment();
         Bundle args = new Bundle();
@@ -60,7 +53,61 @@ public class ReferralsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_referrals, container, false);
+
+        binding = FragmentReferralsBinding.inflate(getLayoutInflater(), container, false);
+        initialization();
+        return binding.getRoot();
+    }
+    private void initialization(){
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uId= user.getUid();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("appConfig").document("referralInfo").get().addOnCompleteListener(
+                new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if(documentSnapshot.exists()){
+                            binding.referralline1.setText(documentSnapshot.get("get").toString());
+                            binding.referralline2.setText(documentSnapshot.get("for").toString());
+                            binding.referralline3.setText(documentSnapshot.get("when").toString());
+                        }
+                    }
+                }
+        );
+
+        db.collection("users").document(uId).collection("referrals").document(uId).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                                DocumentSnapshot document = task.getResult();
+                                if(document.exists()) {
+                                    binding.tvReferralCount.setText(document.get("referralCount").toString());
+                                    binding.tvReferralEarning.setText(document.get("referralEarnings").toString());
+                                }
+                            }
+                        });
+
+        db.collection("users").document(uId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot documentSnapshot = task.getResult();
+                if(documentSnapshot.exists()) {
+                    binding.etCode.setText(documentSnapshot.get("referralId").toString());
+                }
+            }
+        });
+        binding.referraltutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/legendzonegame/refer-and-earn"));
+                startActivity(browserIntent);
+            }
+        });
+
+
     }
 }
