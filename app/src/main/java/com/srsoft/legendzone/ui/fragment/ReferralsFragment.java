@@ -1,5 +1,9 @@
 package com.srsoft.legendzone.ui.fragment;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,9 +11,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +31,8 @@ public class ReferralsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private ClipboardManager clipboardManager;
+    private ClipData clipData;
     private String mParam1;
     private String mParam2;
 
@@ -105,6 +113,44 @@ public class ReferralsFragment extends Fragment {
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://sites.google.com/view/legendzonegame/refer-and-earn"));
                 startActivity(browserIntent);
+            }
+        });
+
+        binding.btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                db.collection("appConfig").document("updateManager").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                       DocumentSnapshot document = task.getResult();
+                        try {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/plain");
+                            String text;
+                            text = binding.etCode.getText().toString();
+                            String shareMessage =document.getString("updateUrl")+"\n" +"Download Legendzone - No. of Esports App. Use my referral code to avail benefits."+"\n\n Code: "+text;
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                            startActivity(shareIntent);
+
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+            }
+        });
+
+        binding.btnCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clipboardManager = (ClipboardManager) requireContext().getSystemService(CLIPBOARD_SERVICE);
+                String text;
+                text = binding.etCode.getText().toString();
+                clipData = ClipData.newPlainText("text", text);
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(getContext(), "Copied!", Toast.LENGTH_SHORT).show();
             }
         });
 

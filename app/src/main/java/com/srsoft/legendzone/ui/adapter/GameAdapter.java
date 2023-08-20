@@ -51,10 +51,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
 
+                if(item.getGameId().matches("wingo")) {
                     Intent intent = new Intent(context, WingoGame.class);
                     context.startActivity(intent);
 
-
+                }else{
+                    Toast.makeText(context, "Not available!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         holder.mBinding.progressBar.setVisibility(View.VISIBLE);

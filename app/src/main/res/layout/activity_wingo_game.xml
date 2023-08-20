@@ -191,6 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@drawable/edittext_bg_rounded_error"
                 android:weightSum="5">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -242,6 +243,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@drawable/edittext_bg_rounded_success"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
@@ -302,7 +305,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/green"
+                    android:backgroundTint="@color/redlight"
                     android:text="Small"
                     android:textAlignment="center"
                     android:textColor="@color/white"

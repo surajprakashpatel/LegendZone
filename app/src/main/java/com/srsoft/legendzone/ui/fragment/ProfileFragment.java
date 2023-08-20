@@ -67,6 +67,7 @@ public class ProfileFragment extends BaseFragment {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         binding.name.setText(user.getDisplayName());
+        binding.number.setText(user.getPhoneNumber());
 
         Glide.with(ProfileFragment.this)
                 .load(user.getPhotoUrl())

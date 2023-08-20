@@ -64,6 +64,12 @@ public class WingoGame extends BaseActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        initialization();
+        super.onResume();
+    }
+
     private void initialization(){
 
         binding.fab0.setImageBitmap(textAsBitmap("0", 40, Color.RED));
@@ -261,7 +267,6 @@ public class WingoGame extends BaseActivity {
                     @Override
                     public void onFinish() {
 
-                        showLoader();
                     }
                 }.start();
             }
@@ -298,7 +303,7 @@ public class WingoGame extends BaseActivity {
 
         bottomSheetDialog.show();
         EditText etAmount = bottomSheetDialog.findViewById(R.id.etAmount);
-        etAmount.setText("1");
+        etAmount.setText("10");
         Button betbtn = bottomSheetDialog.findViewById(R.id.btnapply);
         betbtn.setOnClickListener(new View.OnClickListener() {
             @Override

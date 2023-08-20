@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:text="NOTICE : This is to notifiy that all users are modiefeid to do theri work acourdingng to he "
+                    android:text="NOTICE : Referrals are "
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp" />
 
@@ -98,8 +98,7 @@
                 android:paddingHorizontal="@dimen/_12sdp"
                 android:text="Games"
                 android:textColor="@color/black"
-                android:fontFamily="@font/aller_bold"
-                android:textSize="@dimen/_12ssp" />
+                android:textSize="@dimen/_15ssp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -193,6 +192,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:text="Recent Withdrawals"
                     android:fontFamily="@font/aller_bold"
                     android:textColor="@color/black"

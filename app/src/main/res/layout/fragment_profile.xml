@@ -83,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_12sdp"
         android:layout_marginVertical="@dimen/_5sdp"
-        android:text="+918815057965"
+        android:text="+91XXXXXXXXX"
         android:textColor="@color/primary"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"

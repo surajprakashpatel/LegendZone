@@ -26,7 +26,7 @@ public class FundWithdrawalActivity extends BaseActivity {
 
     private ActivityFundWithdrawalBinding binding;
 
-    int withdrawable=0;
+    float withdrawable=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class FundWithdrawalActivity extends BaseActivity {
                DocumentSnapshot documentSnapshot = task.getResult();
                String balance = documentSnapshot.get("totalBalance").toString();
                binding.balancetv.setText("Available Balance: "+balance);
-               withdrawable = Integer.parseInt(balance);
+               withdrawable = Float.valueOf(balance);
                hideLoader();
             }
         });
@@ -55,9 +55,9 @@ public class FundWithdrawalActivity extends BaseActivity {
             public void onClick(View v) {
                 String amount = binding.amountField.getText().toString().trim();
                 String upiId = binding.upiField.getText().toString().trim();
-                float fund = Float.parseFloat(amount);
+                int fund = Integer.parseInt(amount);
 
-                if(withdrawable<=Integer.parseInt(amount)){
+                if(withdrawable<=Float.parseFloat(amount)){
                     showAlertDialog("Enter amount less than balance",FundWithdrawalActivity.this);
                 } else if (amount.matches("")) {
                     showAlertDialog("Enter amount",FundWithdrawalActivity.this);

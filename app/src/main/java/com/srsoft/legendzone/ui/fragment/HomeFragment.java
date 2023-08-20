@@ -1,5 +1,6 @@
 package com.srsoft.legendzone.ui.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.srsoft.legendzone.R;
@@ -105,9 +107,41 @@ public class HomeFragment extends Fragment {
 
         getBanner();
         getGames();
+        getUpdateInfo();
+        getNotice();
         getrecentWithdrawals();
 
 
+
+    }
+
+    private void getUpdateInfo() {
+        database.collection("appConfig").document("updateManager").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                if(document.getString("updateAvailable").matches("yes")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage(document.getString("updateMsg"));
+                    builder.setIcon(android.R.drawable.ic_menu_info_details);
+                    builder.setCancelable(false);
+                    AlertDialog dialog = builder.setNegativeButton("OK", (dialogInterface, i) -> dialogInterface.dismiss()).create();
+                    dialog.show();
+                }
+
+            }
+        });
+    }
+
+    private void getNotice() {
+        database.collection("appConfig").document("notice").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                String notice = document.getString("notice");
+                binding.notice.setText(notice);
+            }
+        });
     }
 
     private void getBanner() {
