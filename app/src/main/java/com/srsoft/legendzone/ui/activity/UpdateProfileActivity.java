@@ -109,6 +109,7 @@ public class UpdateProfileActivity extends BaseActivity {
 
     private void updateProfile() {
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String name = binding.etName.getText().toString();
         String age = binding.etAge.getText().toString();
         String email = binding.etEmail.getText().toString();
@@ -127,8 +128,28 @@ public class UpdateProfileActivity extends BaseActivity {
             binding.etreferralId.setError("Enter valid referral code");
         }else{
             showLoader();
+            db.collection("users").whereEqualTo("referralId",referredBy).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()) {
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        if(queryDocumentSnapshots.size()>0) {
+                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                            db.collection("users").document(document.getId()).collection("referrals")
+                                    .document(document.getId()).update("referralCount", FieldValue.increment(1));
+                            uploadImage(name,age,email,pincode,referredBy);
 
-            uploadImage(name,age,email,pincode,referredBy);
+                            hideLoader();
+
+
+                        }else{
+                            showAlertDialog("Enter valid referral code!",UpdateProfileActivity.this);
+                            hideLoader();
+                        }
+                    }
+                }
+            });
+
 
         }
 
@@ -137,6 +158,7 @@ public class UpdateProfileActivity extends BaseActivity {
 
     private void uploadImage(String name,String age,String email,String pincode,String referredBy) {
 
+        showLoader();
 
         // File or Blob
         File file =profileImage;
@@ -195,15 +217,7 @@ public class UpdateProfileActivity extends BaseActivity {
                         db.collection("users").document(userId).collection("referrals")
                                 .document(userId).set(referraldata);
 
-                        db.collection("users").whereEqualTo("referralId",referredBy).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                               QuerySnapshot queryDocumentSnapshots = task.getResult();
-                               DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                               db.collection("users").document(document.getId()).collection("referrals")
-                                       .document(document.getId()).update("referralCount", FieldValue.increment(1));
-                            }
-                        });
+
                         hideLoader();
 
                         Intent intent = new Intent(UpdateProfileActivity.this,DashboardActivity.class);

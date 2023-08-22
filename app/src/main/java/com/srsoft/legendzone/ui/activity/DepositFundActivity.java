@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -122,12 +123,19 @@ public class DepositFundActivity extends BaseActivity implements PaymentResultLi
 
     private void updateRechargeHistory() {
         showLoader();
-        SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // Define the desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+
+        // Format the date and time
+        String formattedDate = dateFormat.format(currentDate);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         int fund = Integer.valueOf(amount.substring(0,amount.length()-2));
         Map<String, Object> data = new HashMap<>();
-        data.put("date",dt.toString());
+        data.put("date",formattedDate);
         data.put("amount",fund);
         db.collection("users").document(uId).collection("rechargeHistory").document().set(data);
         db.collection("withdrawalRequests").document(user.getUid()).set(data);

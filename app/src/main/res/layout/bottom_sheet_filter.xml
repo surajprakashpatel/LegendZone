@@ -48,6 +48,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_weight="0.7"/>
             <TextView
+                android:id="@+id/betTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Red"

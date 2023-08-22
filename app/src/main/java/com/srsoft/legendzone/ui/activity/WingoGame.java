@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.math.BigDecimal;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 ;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +43,9 @@ import com.srsoft.legendzone.models.GameRecord;
 import com.srsoft.legendzone.ui.adapter.GameRecordAdapter;
 import com.srsoft.legendzone.ui.common.BaseActivity;
 
+import org.w3c.dom.Text;
+
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -232,8 +237,10 @@ public class WingoGame extends BaseActivity {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 DocumentSnapshot document = task.getResult();
-                                balance =Double.parseDouble(document.get("totalBalance").toString()) ;
-                                binding.balancetextview.setText(document.get("totalBalance").toString());
+                                if(document.exists()) {
+                                    balance = Double.parseDouble(document.get("totalBalance").toString());
+                                    binding.balancetextview.setText("₹ "+document.get("totalBalance").toString());
+                                }
                             }
                         });
 
@@ -301,6 +308,8 @@ public class WingoGame extends BaseActivity {
             mBehavior.setPeekHeight(view.getHeight());//get the height dynamically
         });
 
+        TextView textView = bottomSheetDialog.findViewById(R.id.betTV);
+        textView.setText(""+bet);
         bottomSheetDialog.show();
         EditText etAmount = bottomSheetDialog.findViewById(R.id.etAmount);
         etAmount.setText("10");
@@ -375,6 +384,8 @@ public class WingoGame extends BaseActivity {
         }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        BigDecimal bd = new BigDecimal(amount).setScale(2,0);
+        double winPrize = bd.doubleValue();
 
         db.collection("wingolive").document("twominutes").update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -390,9 +401,10 @@ public class WingoGame extends BaseActivity {
                 String formattedDate = dateFormat.format(currentDate);
                 Map<String, Object> betdata = new HashMap<>();
                 betdata.put("uId",user.getUid());
-                betdata.put("betAmount", deduction);
+                betdata.put("betAmount", winPrize);
                 betdata.put("betOn",bet);
                 db.collection("wingoBets").document().set(betdata);
+                betdata.replace("betAmount",deduction);
                 betdata.remove("uId");
                 betdata.put("dateTime",formattedDate);
                 betdata.put("game","Wingo");

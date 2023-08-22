@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.srsoft.legendzone.R;
 import com.srsoft.legendzone.databinding.FragmentBetsBinding;
@@ -77,7 +78,7 @@ public class BetsFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("users").document(user.getUid()).collection("betHistory")
-                .limit(10).orderBy("dateTime").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .limit(10).orderBy("dateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         ArrayList<BetRecord> betRecords = new ArrayList<>();

@@ -56,9 +56,9 @@ public class GameRecordAdapter extends  RecyclerView.Adapter<GameRecordAdapter.M
                 break;
             case "6": color="Green";size = "Big";
                 break;
-            case "7": color="Green"; size = "Big";
+            case "7": color="Red"; size = "Big";
                 break;
-            case "8": color="blue"; size = "Big";
+            case "8": color="Green"; size = "Big";
                 break;
             case "9": color="Blue";size = "Big";
                 break;

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.srsoft.legendzone.databinding.ActivityFundWithdrawalBinding;
 import com.srsoft.legendzone.ui.common.BaseActivity;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,9 +66,16 @@ public class FundWithdrawalActivity extends BaseActivity {
                 } else if (upiId.matches("")) {
                     showAlertDialog("Enter UPI Id",FundWithdrawalActivity.this);
                 }else {
-                    SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    Calendar calendar = Calendar.getInstance();
+                    Date currentDate = calendar.getTime();
+
+                    // Define the desired date format
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+
+                    // Format the date and time
+                    String dt = dateFormat.format(currentDate);
                     Map<String, Object> data = new HashMap<>();
-                    data.put("date",dt.toString());
+                    data.put("date",dt);
                     data.put("amount",amount);
                     data.put("UPI",upiId);
                     db.collection("users").document(user.getUid()).collection("withdrawHistory").document().set(data);
