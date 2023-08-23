@@ -93,7 +93,6 @@ public class WingoGame extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WingoGame.this, DepositFundActivity.class);
                 startActivity(intent);
-                finishAffinity();
             }
         });
         binding.btnWithdrawFunds.setOnClickListener(new View.OnClickListener() {
@@ -324,7 +323,9 @@ public class WingoGame extends BaseActivity {
                     bottomSheetDialog.hide();
                 }else {
                     balance = balance-amount;
-                    binding.balancetextview.setText(""+(float)balance);
+                    BigDecimal bal = new BigDecimal(balance).setScale(2,5);
+                    balance = bal.doubleValue();
+                    binding.balancetextview.setText("₹ "+balance);
                     float deduction = (float) amount;
                     amount = (double) (amount-amount*0.02);
                     getUpdateData(bet, amount,deduction);
@@ -384,7 +385,7 @@ public class WingoGame extends BaseActivity {
         }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        BigDecimal bd = new BigDecimal(amount).setScale(2,0);
+        BigDecimal bd = new BigDecimal(amount).setScale(2,5);
         double winPrize = bd.doubleValue();
 
         db.collection("wingolive").document("twominutes").update(data).addOnCompleteListener(new OnCompleteListener<Void>() {
