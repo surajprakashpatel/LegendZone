@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.srsoft.legendzone.databinding.ActivityFundWithdrawalBinding;
 import com.srsoft.legendzone.ui.common.BaseActivity;
 
@@ -85,6 +86,7 @@ public class FundWithdrawalActivity extends BaseActivity {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
+                                    FirebaseInAppMessaging.getInstance().triggerEvent("fundWithdraw");
                                     Toast.makeText(FundWithdrawalActivity.this, "Withdrawal Successful!", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(FundWithdrawalActivity.this, DashboardActivity.class);
                                     startActivity(intent);

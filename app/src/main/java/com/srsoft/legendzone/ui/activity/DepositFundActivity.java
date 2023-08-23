@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.srsoft.legendzone.R;
@@ -144,6 +145,7 @@ public class DepositFundActivity extends BaseActivity implements PaymentResultLi
     }
 
     private void updateBalance() {
+        FirebaseInAppMessaging.getInstance().triggerEvent("balanceAdded");
         int fund = Integer.valueOf(amount.substring(0,amount.length()-2));
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("users").document(uId).update("totalBalance", FieldValue.increment(fund));
@@ -151,6 +153,7 @@ public class DepositFundActivity extends BaseActivity implements PaymentResultLi
         Intent intent = new Intent(DepositFundActivity.this, DashboardActivity.class);
         startActivity(intent);
         finishAffinity();
+
     }
 
     @Override

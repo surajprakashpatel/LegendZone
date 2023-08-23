@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.srsoft.legendzone.R;
 import com.srsoft.legendzone.databinding.FragmentHomeBinding;
 import com.srsoft.legendzone.models.Game;
@@ -98,7 +99,7 @@ public class HomeFragment extends Fragment {
     private void initialization() {
 
         database = FirebaseFirestore.getInstance();
-
+        FirebaseInAppMessaging.getInstance().triggerEvent("version1.1");
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         binding.gamesRecycler.setLayoutManager(layoutManager);
         gameAdapter = new GameAdapter(getActivity(), games, false);

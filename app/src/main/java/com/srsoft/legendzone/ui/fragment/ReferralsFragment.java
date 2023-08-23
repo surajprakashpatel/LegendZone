@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.srsoft.legendzone.databinding.FragmentReferralsBinding;
 
 public class ReferralsFragment extends Fragment {
@@ -68,6 +69,7 @@ public class ReferralsFragment extends Fragment {
     }
     private void initialization(){
 
+        FirebaseInAppMessaging.getInstance().triggerEvent("referral");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uId= user.getUid();
 

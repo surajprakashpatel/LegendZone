@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.srsoft.legendzone.R;
 import com.srsoft.legendzone.databinding.ActivityWingoGameBinding;
 import com.srsoft.legendzone.models.Game;
@@ -77,6 +78,7 @@ public class WingoGame extends BaseActivity {
 
     private void initialization(){
 
+        FirebaseInAppMessaging.getInstance().triggerEvent("wingoOpen");
         binding.fab0.setImageBitmap(textAsBitmap("0", 40, Color.RED));
         binding.fab1.setImageBitmap(textAsBitmap("1", 40, Color.WHITE));
         binding.fab2.setImageBitmap(textAsBitmap("2", 40, Color.WHITE));
