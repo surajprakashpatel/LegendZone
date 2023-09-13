@@ -117,17 +117,19 @@ public class HomeFragment extends Fragment {
     }
 
     private void getUpdateInfo() {
-        database.collection("appConfig").document("updateManager").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        database.collection("appConfig").document("updateManagerv1").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot document = task.getResult();
-                if(document.getString("updateAvailable").matches("yes")){
+                if(document.exists()){
+                if(document.getString("updateAvailable").matches("yes")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage(document.getString("updateMsg"));
                     builder.setIcon(android.R.drawable.ic_menu_info_details);
                     builder.setCancelable(false);
                     AlertDialog dialog = builder.setNegativeButton("OK", (dialogInterface, i) -> dialogInterface.dismiss()).create();
                     dialog.show();
+                }
                 }
 
             }
